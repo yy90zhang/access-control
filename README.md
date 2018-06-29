@@ -1,2 +1,2 @@
 # access-control
-source code for smart-contract-based access control for the IoT
+Source code for the paper "Smart contract-based access control for the IoT". 
