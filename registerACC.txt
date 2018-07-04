@@ -1,0 +1,586 @@
+var Web3 = require('web3');
+var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+
+var regAddr = "0xddf27a729d05be6f11be50b1905daa6e7b508c91";
+
+var regAbi = [
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_str",
+				"type": "string"
+			}
+		],
+		"name": "stringToBytes32",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"name": "lookupTable",
+		"outputs": [
+			{
+				"name": "scName",
+				"type": "string"
+			},
+			{
+				"name": "subject",
+				"type": "address"
+			},
+			{
+				"name": "object",
+				"type": "address"
+			},
+			{
+				"name": "creator",
+				"type": "address"
+			},
+			{
+				"name": "scAddress",
+				"type": "address"
+			},
+			{
+				"name": "abi",
+				"type": "bytes"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_methodName",
+				"type": "string"
+			}
+		],
+		"name": "getContractAddr",
+		"outputs": [
+			{
+				"name": "_scAddress",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_methodName",
+				"type": "string"
+			}
+		],
+		"name": "getContractAbi",
+		"outputs": [
+			{
+				"name": "_abi",
+				"type": "bytes"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_methodName",
+				"type": "string"
+			},
+			{
+				"name": "_abi",
+				"type": "bytes"
+			}
+		],
+		"name": "methodAbiUpdate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_methodName",
+				"type": "string"
+			},
+			{
+				"name": "_scAddress",
+				"type": "address"
+			}
+		],
+		"name": "methodAcAddressUpdate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_name",
+				"type": "string"
+			}
+		],
+		"name": "methodDelete",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_oldName",
+				"type": "string"
+			},
+			{
+				"name": "_newName",
+				"type": "string"
+			}
+		],
+		"name": "methodNameUpdate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_methodName",
+				"type": "string"
+			},
+			{
+				"name": "_scname",
+				"type": "string"
+			},
+			{
+				"name": "_subject",
+				"type": "address"
+			},
+			{
+				"name": "_object",
+				"type": "address"
+			},
+			{
+				"name": "_creator",
+				"type": "address"
+			},
+			{
+				"name": "_scAddress",
+				"type": "address"
+			},
+			{
+				"name": "_abi",
+				"type": "bytes"
+			}
+		],
+		"name": "methodRegister",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_methodName",
+				"type": "string"
+			},
+			{
+				"name": "_scName",
+				"type": "string"
+			}
+		],
+		"name": "methodScNameUpdate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+];
+
+var register = web3.eth.contract(regAbi).at(regAddr);
+var _methodName = "1";
+var _scName = "2";
+var _subject = "0x0d1f8a489b1312689f11f7fe79dfc3b61ffa4160";
+var _object = "0x0d1f8a489b1312689f11f7fe79dfc3b61ffa4160";
+var _creator = "0x0d1f8a489b1312689f11f7fe79dfc3b61ffa4160";
+var _scAddr = "0x0d1f8a489b1312689f11f7fe79dfc3b61ffa4160";
+var _abi = [
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "subject",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "object",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_jc",
+				"type": "address"
+			}
+		],
+		"name": "setJC",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_resource",
+				"type": "string"
+			},
+			{
+				"name": "_action",
+				"type": "string"
+			}
+		],
+		"name": "getPolicy",
+		"outputs": [
+			{
+				"name": "_permission",
+				"type": "string"
+			},
+			{
+				"name": "_minInterval",
+				"type": "uint256"
+			},
+			{
+				"name": "_threshold",
+				"type": "uint256"
+			},
+			{
+				"name": "_ToLR",
+				"type": "uint256"
+			},
+			{
+				"name": "_NoFR",
+				"type": "uint256"
+			},
+			{
+				"name": "_res",
+				"type": "bool"
+			},
+			{
+				"name": "_errcode",
+				"type": "uint8"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "jc",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_resource",
+				"type": "string"
+			},
+			{
+				"name": "_action",
+				"type": "string"
+			}
+		],
+		"name": "policyDelete",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_resource",
+				"type": "string"
+			},
+			{
+				"name": "_action",
+				"type": "string"
+			},
+			{
+				"name": "_newThreshold",
+				"type": "uint256"
+			}
+		],
+		"name": "thresholdUpdate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_resource",
+				"type": "string"
+			}
+		],
+		"name": "getTimeofUnblock",
+		"outputs": [
+			{
+				"name": "_penalty",
+				"type": "uint256"
+			},
+			{
+				"name": "_timeOfUnblock",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_resource",
+				"type": "string"
+			},
+			{
+				"name": "_action",
+				"type": "string"
+			},
+			{
+				"name": "_permission",
+				"type": "string"
+			},
+			{
+				"name": "_minInterval",
+				"type": "uint256"
+			},
+			{
+				"name": "_threshold",
+				"type": "uint256"
+			}
+		],
+		"name": "policyAdd",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_resource",
+				"type": "string"
+			},
+			{
+				"name": "_action",
+				"type": "string"
+			},
+			{
+				"name": "_newMinInterval",
+				"type": "uint256"
+			}
+		],
+		"name": "minIntervalUpdate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_resource",
+				"type": "string"
+			},
+			{
+				"name": "_action",
+				"type": "string"
+			},
+			{
+				"name": "_time",
+				"type": "uint256"
+			}
+		],
+		"name": "accessControl",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_str",
+				"type": "string"
+			}
+		],
+		"name": "stringToBytes32",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_resource",
+				"type": "string"
+			},
+			{
+				"name": "_action",
+				"type": "string"
+			},
+			{
+				"name": "_newPermission",
+				"type": "string"
+			}
+		],
+		"name": "policyUpdate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "deleteACC",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"name": "_subject",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "_from",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "_errmsg",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "_result",
+				"type": "bool"
+			},
+			{
+				"indexed": false,
+				"name": "_time",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "_penalty",
+				"type": "uint256"
+			}
+		],
+		"name": "ReturnAccessResult",
+		"type": "event"
+	}
+]
+
+register.methodRegister.sendTransaction(_methodName, _scName, _subject, _object, _creator, _scAddr, _abi, {from:web3.eth.coinbase, gas:3000000});
